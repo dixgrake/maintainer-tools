@@ -18,6 +18,7 @@ import subprocess
 import tempfile
 
 import appdirs
+from .config import MAIN_BRANCHES, NOT_ADDONS
 from .github_login import login
 
 ALL = ['OCA_PROJECTS', 'OCA_REPOSITORY_NAMES', 'url']
@@ -83,13 +84,17 @@ OCA_PROJECTS = {
     'financial control': ['margin-analysis'],
     'Infrastructure': ['infrastructure-dns'],
     'geospatial': ['geospatial'],
-    'hr': ['hr-timesheet',
+    'hr': ['timesheet',
            'hr',
+           'hr-attendance',
+           'hr-expense',
+           'hr-holidays',
            'department',
            ],
     'connector-odoo2odoo': ['connector-odoo2odoo'],
     'multi-company': ['multi-company'],
     'l10n-argentina': ['l10n-argentina'],
+    'l10n-austria': ['l10n-austria'],
     'l10n-belarus': ['l10n-belarus'],
     'l10n-belgium': ['l10n-belgium'],
     'l10n-brazil': ['l10n-brazil'],
@@ -106,6 +111,7 @@ OCA_PROJECTS = {
     'l10n-finland': ['l10n-finland'],
     'l10n-france': ['l10n-france'],
     'l10n-germany': ['l10n-germany'],
+    'l10n-greece': ['l10n-greece'],
     'l10n-india': ['l10n-india'],
     'l10n-indonesia': ['l10n-indonesia'],
     'l10n-iran': ['l10n-iran'],
@@ -113,6 +119,7 @@ OCA_PROJECTS = {
     'l10n-italy': ['l10n-italy'],
     'l10n-japan': ['l10n-japan'],
     'l10n-luxemburg': ['l10n-luxemburg'],
+    'l10n-macedonia': ['l10n-macedonia'],
     'l10n-mexico': ['l10n-mexico'],
     'l10n-morocco': ['l10n-morocco'],
     'l10n-netherlands': ['l10n-netherlands'],
@@ -128,8 +135,9 @@ OCA_PROJECTS = {
     'l10n-taiwan': ['l10n-taiwan'],
     'l10n-thailand': ['l10n-thailand'],
     'l10n-turkey': ['l10n-turkey'],
-    'l10n-usa': ['l10n-usa'],
     'l10n-united-kingdom': ['l10n-united-kingdom'],
+    'l10n-uruguay': ['l10n-uruguay'],
+    'l10n-usa': ['l10n-usa'],
     'l10n-venezuela': ['l10n-venezuela'],
     'l10n-vietnam': ['l10n-vietnam'],
     'logistics': ['carrier-delivery',
@@ -140,6 +148,7 @@ OCA_PROJECTS = {
                   'stock-logistics-reporting',
                   'rma',
                   'ddmrp',
+                  'wms',
                   ],
     'manufacturing': ['manufacture',
                       'manufacture-reporting',
@@ -151,6 +160,7 @@ OCA_PROJECTS = {
     'product': ['product-attribute',
                 'product-kitting',
                 'product-variant',
+                'product-pack',
                 ],
     'project / services': ['project-reporting',
                            'project-service',
@@ -162,6 +172,8 @@ OCA_PROJECTS = {
                            'connector-jira',
                            ],
     'social': ['social'],
+    'storage': ['storage'],
+    'search-engine': ['search-engine'],
     'tools': ['reporting-engine',
               'report-print-send',
               'webkit-tools',
@@ -196,50 +208,21 @@ OCA_PROJECTS = {
 }
 
 
-NOT_ADDONS = {
-    'odoo-community.org',
-    'contribute-md-template',
-    'maintainer-tools',
-    'maintainer-quality-tools',
-    'odoo-sphinx-autodoc',
-    'openupgradelib',
-    'connector-magento-php-extension',
-    'OCB',
-    'OpenUpgrade',
-    'pylint-odoo',
-    'oca-custom',
-    'odoorpc',
-    'oca-decorators',
-    'oca-weblate-deployment',
-    'odoo-sentinel',
-}
-
-
-MAIN_BRANCHES = (
-    '6.1',
-    '7.0',
-    '8.0',
-    '9.0',
-    '10.0',
-    '11.0',
-)
-
-
 def get_repositories():
     gh = login()
-    all_repos = [repo.name for repo in gh.iter_user_repos('OCA')
+    all_repos = [repo.name for repo in gh.repositories_by('OCA')
                  if repo.name not in NOT_ADDONS]
     return all_repos
 
 
 def get_repositories_and_branches(repos=(), branches=MAIN_BRANCHES):
     gh = login()
-    for repo in gh.iter_user_repos('OCA'):
+    for repo in gh.repositories_by('OCA'):
         if repos and repo.name not in repos:
             continue
         if repo.name in NOT_ADDONS:
             continue
-        for branch in repo.iter_branches():
+        for branch in repo.branches():
             if branches and branch.name not in branches:
                 continue
             yield repo.name, branch.name

@@ -18,7 +18,8 @@ def login():
         token = config.get('GitHub', 'token')
     if not token:
         sys.exit("No token has been generated for this script. "
-                 "Please run 'oca-github-login'.")
+                 "Please run 'oca-github-login' or set the GITHUB_TOKEN "
+                 "environment variable.")
     return github3.login(token=token)
 
 
@@ -57,7 +58,7 @@ def authorize_token(user):
                 if error['code'] == 'already_exists':
                     msg = ("The 'OCA (odoo community association) Maintainers "
                            "Tools' token already exists. You will find it at "
-                           "https://github.com/settings/applications and can "
+                           "https://github.com/settings/tokens and can "
                            "revoke it or set the token manually in the "
                            "configuration file.")
                     sys.exit(msg)

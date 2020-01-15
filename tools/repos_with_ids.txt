@@ -31,9 +31,10 @@
 90|github.com/OCA/account-consolidation
 147|github.com/OCA/sale-financial
 136|github.com/OCA/product-kitting
- 91|github.com/OCA/account-financial-reporting
-117|github.com/OCA/hr-timesheet
+91|github.com/OCA/account-financial-reporting
+117|github.com/OCA/timesheet
 96|github.com/OCA/account-payment
+98|github.com/OCA/account-reconcile
 99|github.com/OCA/delivery-carrier
 115|github.com/OCA/geospatial
 131|github.com/OCA/manufacture-reporting
@@ -42,7 +43,6 @@
 138|github.com/OCA/program
 137|github.com/OCA/product-variant
 132|github.com/OCA/margin-analysis
-97|github.com/OCA/banking
 123|github.com/OCA/l10n-luxemburg
 176|github.com/OCA/l10n-netherlands
 172|github.com/OCA/vertical-agriculture
@@ -67,7 +67,6 @@
 125|github.com/OCA/l10n-switzerland
 120|github.com/OCA/l10n-canada
 104|github.com/OCA/connector-cmis
-98|github.com/OCA/bank-statement-reconcile
 124|github.com/OCA/l10n-brazil
 93|github.com/OCA/account-fiscal-rule
 94|github.com/OCA/account-invoice-reporting
@@ -124,7 +123,8 @@
 224|github.com/OCA/infrastructure-dns
 225|github.com/OCA/website-cms
 226|github.com/OCA/edi
-227|github.com/OCA/intrastat
+227|github.com/OCA/intrastat-extrastat
+228|github.com/OCA/connector-telephony
 229|github.com/OCA/interface-github
 230|github.com/OCA/queue
 236|github.com/OCA/l10n-chile
@@ -158,3 +158,21 @@
 269|github.com/OCA/iot
 270|github.com/OCA/connector-spscommerce
 271|github.com/OCA/rest-framework
+272|github.com/OCA/l10n-greece
+273|github.com/OCA/oca-custom
+274|github.com/OCA/l10n-uruguay
+275|github.com/OCA/storage
+276|github.com/OCA/search-engine
+277|github.com/OCA/mis-builder-contrib
+278|github.com/OCA/l10n-austria
+279|github.com/OCA/calendar
+281|github.com/OCA/payroll
+282|github.com/OCA/helpdesk
+283|github.com/OCA/l10n-ukraine
+284|github.com/OCA/brand
+285|github.com/OCA/wms
+286|github.com/OCA/product-pack
+287|github.com/OCA/l10n-macedonia
+288|github.com/OCA/hr-attendance
+289|github.com/OCA/hr-expense
+290|github.com/OCA/hr-holidays
